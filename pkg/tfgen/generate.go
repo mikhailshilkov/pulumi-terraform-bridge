@@ -16,6 +16,7 @@ package tfgen
 
 import (
 	"fmt"
+	"github.com/y0ssar1an/q"
 	"io/ioutil"
 	"os"
 	"path"
@@ -449,7 +450,7 @@ func (g *generator) gatherConfig() *module {
 	for _, key := range cfgkeys {
 		// Generate a name and type to use for this key.
 		sch := cfg[key]
-		docURL := getDocsIndexURL(g.info.Name)
+		docURL := getDocsIndexURL(g.info.GetGitHubOrg(), g.info.Name)
 		if prop := propertyVariable(key, sch, custom[key], "", sch.Description, docURL, true /*out*/); prop != nil {
 			prop.config = true
 			config.addMember(prop)
@@ -563,7 +564,10 @@ func (g *generator) gatherResource(rawname string,
 				"construction to achieve fine-grained programmatic control over provider settings. See the\n"+
 				"[documentation](https://www.pulumi.com/docs/reference/programming-model/#providers) for more information.",
 			g.info.Name)
-		parsedDocs.URL = getDocsIndexURL(g.info.Name)
+		parsedDocs.URL = getDocsIndexURL(g.info.GetGitHubOrg(), g.info.Name)
+		q.Q("docs url", parsedDocs.URL)
+		q.Q("github org", g.info.GetGitHubOrg())
+		q.Q("name", g.info.Name)
 	}
 
 	// Create an empty module and associated resource type.

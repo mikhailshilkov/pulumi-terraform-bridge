@@ -19,6 +19,7 @@ require (
 	github.com/pulumi/pulumi v1.2.0
 	github.com/spf13/cobra v0.0.5
 	github.com/stretchr/testify v1.4.0
+	github.com/y0ssar1an/q v1.0.7 // indirect
 	golang.org/x/net v0.0.0-20190926025831-c00fd9afed17
 	google.golang.org/grpc v1.24.0
 )
